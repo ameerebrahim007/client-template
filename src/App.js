@@ -1,7 +1,20 @@
 import logo from './logo.svg';
 import './App.css';
+import {useEffect} from 'react';
+
 
 function App() {
+
+useEffect(() => {
+  window.addEventListener('message', (event) => {
+    if (event.data && event.data.type === 'dataFromRN') {
+      const receivedData = event.data.payload;
+      console.log('Received data from React Native:', receivedData);
+  }
+  });
+})
+
+
   return (
     <div className="App">
       <header className="App-header">
@@ -17,6 +30,7 @@ function App() {
         >
           Learn React
         </a>
+        <button id="message">Click hete</button>
       </header>
     </div>
   );
