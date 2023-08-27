@@ -26,7 +26,7 @@ function App() {
 
   const handleClick = () => {
     // Prepare data to send to React Native
-    alert(data);
+    alert(JSON.stringify(data));
     const dataToSend = {
       key1: 'Web to App',
       key2: 'value2',
