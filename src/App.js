@@ -9,28 +9,35 @@ function App() {
     const data = JSON.parse(dataString);
     console.log('Received data from React Native:', data);
     // Process the received data in your web app
-    setData(data);
+    setData(JSON.stringify(data)); // Stringify the object to display as plain text
   };
 
-    useEffect (()=>{
-      if(data!=='')
-     alert(JSON.stringify(data)) 
-    },[data])
-  
-
   // Add an event listener to listen for messages from React Native
-  // window.addEventListener('message', (event) => {
-  //   console.log('data hereeeeee');
-  //   if (event.data && event.data.type === 'dataFromRN') {
-  //     const receivedData = event.data.payload;
-  //     setData(JSON.parse(receivedData));
-  //     console.log('Received data from React Native:', receivedData);
-  //   }
-  // });
+  useEffect(() => {
+    window.addEventListener('message', (event) => {
+      console.log('data hereeeeee');
+      if (event.data && event.data.type === 'dataFromRN') {
+        const receivedData = event.data.payload;
+        setData(JSON.stringify(JSON.parse(receivedData))); // Stringify the object to display as plain text
+        console.log('Received data from React Native:', receivedData);
+      }
+    });
+
+    // Cleanup the event listener when the component unmounts
+    return () => {
+      window.removeEventListener('message');
+    };
+  }, []);
+
+  useEffect(() =>{
+    if( data.length > 0 ){
+    alert(data);
+    }
+  });
 
   const handleClick = () => {
     // Prepare data to send to React Native
-    alert(JSON.stringify(data));
+    alert(data);
     const dataToSend = {
       key1: 'Web to App',
       key2: 'value2',
@@ -40,23 +47,17 @@ function App() {
     window.postMessage(JSON.stringify(dataToSend), '*');
   };
 
-  
-
   return (
     <div className="App">
       <header className="App-header">
-        {data ? <span>{data.key1}</span> : "Data is empty "}
+        <span>{data}</span>
         <button id="message" onClick={handleClick}>
           Button1
         </button>
-        
         <div id="container">hi</div>
       </header>
     </div>
-    
   );
-
-  
 }
 
 export default App;
