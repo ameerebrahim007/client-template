@@ -12,6 +12,10 @@ function App() {
     setData(data);
   };
 
+    useEffect (()=>{
+      if(data!=='')
+     alert(JSON.stringify(data)) 
+    },[data])
   
 
   // Add an event listener to listen for messages from React Native
