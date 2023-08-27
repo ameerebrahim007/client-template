@@ -4,25 +4,23 @@ import { useEffect, useState } from 'react';
 function App() {
   const [data, setData] = useState('');
 
-  useEffect(() => {
-    // Define the receiveDataFromReactNative function
-    window.receiveDataFromReactNative = (dataString) => {
-      const data = JSON.parse(dataString);
-      console.log('Received data from React Native:', data);
-      // Process the received data in your web app
-      setData(data);
-    };
+  // Define the receiveDataFromReactNative function
+  window.receiveDataFromReactNative = (dataString) => {
+    const data = JSON.parse(dataString);
+    console.log('Received data from React Native:', data);
+    // Process the received data in your web app
+    setData(data);
+  };
 
-    // Add an event listener to listen for messages from React Native
-    window.addEventListener('message', (event) => {
-      console.log('data hereeeeee');
-      if (event.data && event.data.type === 'dataFromRN') {
-        const receivedData = event.data.payload;
-        setData(JSON.parse(receivedData));
-        console.log('Received data from React Native:', receivedData);
-      }
-    });
-  }, []);
+  // Add an event listener to listen for messages from React Native
+  window.addEventListener('message', (event) => {
+    console.log('data hereeeeee');
+    if (event.data && event.data.type === 'dataFromRN') {
+      const receivedData = event.data.payload;
+      setData(JSON.parse(receivedData));
+      console.log('Received data from React Native:', receivedData);
+    }
+  });
 
   const handleClick = () => {
     // Prepare data to send to React Native
