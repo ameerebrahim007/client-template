@@ -36,7 +36,7 @@ function App() {
   return (
     <div className="App">
       <header className="App-header">
-        <span>{data.key1}</span>
+        {data ? <span>{data.key1}</span> : "Data is "}
         <button id="message" onClick={handleClick}>
           Button1
         </button>
