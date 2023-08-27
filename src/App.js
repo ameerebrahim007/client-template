@@ -12,15 +12,17 @@ function App() {
     setData(data);
   };
 
+  alert(data);
+
   // Add an event listener to listen for messages from React Native
-  window.addEventListener('message', (event) => {
-    console.log('data hereeeeee');
-    if (event.data && event.data.type === 'dataFromRN') {
-      const receivedData = event.data.payload;
-      setData(JSON.parse(receivedData));
-      console.log('Received data from React Native:', receivedData);
-    }
-  });
+  // window.addEventListener('message', (event) => {
+  //   console.log('data hereeeeee');
+  //   if (event.data && event.data.type === 'dataFromRN') {
+  //     const receivedData = event.data.payload;
+  //     setData(JSON.parse(receivedData));
+  //     console.log('Received data from React Native:', receivedData);
+  //   }
+  // });
 
   const handleClick = () => {
     // Prepare data to send to React Native
@@ -36,7 +38,7 @@ function App() {
   return (
     <div className="App">
       <header className="App-header">
-        {data ? <span>{data.key1}</span> : "Data is "}
+        {data ? <span>{data.key1}</span> : "Data is empty "}
         <button id="message" onClick={handleClick}>
           Button1
         </button>
