@@ -12,7 +12,7 @@ function App() {
     setData(data);
   };
 
-  alert(data);
+  
 
   // Add an event listener to listen for messages from React Native
   // window.addEventListener('message', (event) => {
@@ -26,6 +26,7 @@ function App() {
 
   const handleClick = () => {
     // Prepare data to send to React Native
+    alert(data);
     const dataToSend = {
       key1: 'Web to App',
       key2: 'value2',
@@ -35,6 +36,8 @@ function App() {
     window.postMessage(JSON.stringify(dataToSend), '*');
   };
 
+  
+
   return (
     <div className="App">
       <header className="App-header">
@@ -42,10 +45,14 @@ function App() {
         <button id="message" onClick={handleClick}>
           Button1
         </button>
+        
         <div id="container">hi</div>
       </header>
     </div>
+    
   );
+
+  
 }
 
 export default App;
